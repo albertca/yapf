@@ -938,7 +938,17 @@ class FormatDecisionState(object):
       return column
     align_style = style.Get('CONTINUATION_ALIGN_STYLE')
     if align_style == 'FIXED':
-      return ((self.line.depth * style.Get('INDENT_WIDTH')) +
+      scope_indent = style.Get('CONTINUATION_SCOPE_INDENT')
+      depth = self.line.depth
+      if scope_indent:
+        token = self.next_token.previous_token
+        while token:
+          if token.OpensScope():
+            depth += 1
+          elif token.ClosesScope():
+            depth -= 1
+          token = token.previous_token
+      return ((depth * style.Get('INDENT_WIDTH')) +
               style.Get('CONTINUATION_INDENT_WIDTH'))
     if align_style == 'VALIGN-RIGHT':
       indent_width = style.Get('INDENT_WIDTH')

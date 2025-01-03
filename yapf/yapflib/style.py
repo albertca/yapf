@@ -158,6 +158,10 @@ _STYLE_HELP = dict(
     CONTINUATION_INDENT_WIDTH=textwrap.dedent("""\
       Indent width used for line continuations.
     """),
+    CONTINUATION_SCOPE_INDENT=textwrap.dedent("""\
+      Enables/disables indentation of continuation lines relative to the
+      number of open parentheses and brackets.
+    """),
     DEDENT_CLOSING_BRACKETS=textwrap.dedent("""\
       Put closing brackets on a separate line, dedented, if the bracketed
       expression can't fit in a single line. Applies to all kinds of brackets,
@@ -491,6 +495,7 @@ def CreatePEP8Style():
       COLUMN_LIMIT=79,
       CONTINUATION_ALIGN_STYLE='SPACE',
       CONTINUATION_INDENT_WIDTH=4,
+      CONTINUATION_SCOPE_INDENT=False,
       DEDENT_CLOSING_BRACKETS=False,
       DISABLE_ENDING_COMMA_HEURISTIC=False,
       DISABLE_SPLIT_LIST_WITH_COMMENT=False,
@@ -680,6 +685,7 @@ _STYLE_OPTION_VALUE_CONVERTER = dict(
     COLUMN_LIMIT=int,
     CONTINUATION_ALIGN_STYLE=_ContinuationAlignStyleStringConverter,
     CONTINUATION_INDENT_WIDTH=int,
+    CONTINUATION_SCOPE_INDENT=_BoolConverter,
     DEDENT_CLOSING_BRACKETS=_BoolConverter,
     DISABLE_ENDING_COMMA_HEURISTIC=_BoolConverter,
     DISABLE_SPLIT_LIST_WITH_COMMENT=_BoolConverter,
